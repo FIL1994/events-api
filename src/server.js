@@ -30,6 +30,23 @@ router.get("/events/:id", async (ctx, next) => {
   ctx.body = event;
 });
 
+router.delete("/events/:id", async ctx => {
+  try {
+    const success = await pg("events")
+      .where({ id: ctx.params.id })
+      .delete();
+
+    if (success) {
+      ctx.body = { message: "success" };
+    } else {
+      // resource was already deleted
+      ctx.status = HttpStatus.NO_CONTENT;
+    }
+  } catch (error) {
+    ctx.throw(HttpStatus.INTERNAL_SERVER_ERROR, error);
+  }
+});
+
 router.post("/events", async (ctx, next) => {
   const newEvent = ctx.request.body;
 
