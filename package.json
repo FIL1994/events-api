@@ -4,7 +4,7 @@
   "description": "A REST API for events",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node src/server.js",
     "knex": "knex --knexfile knexfile.js"
   },
   "keywords": [],
@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "knex": "^0.16.5",
+    "koa": "^2.7.0",
     "pg": "^7.11.0"
   }
 }
