@@ -1,6 +1,6 @@
 # events-api
 
-A REST API for events
+A REST API for events build with Koa, Knex and PostgreSQL
 
 ## Help
 
