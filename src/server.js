@@ -2,6 +2,7 @@ const Koa = require("koa");
 const Router = require("koa-router");
 const bodyParser = require("koa-bodyparser");
 const json = require("koa-json");
+const cors = require("@koa/cors");
 
 const app = new Koa();
 const router = new Router();
@@ -12,6 +13,7 @@ router.get("/", (ctx, next) => {
 });
 
 app
+  .use(cors())
   .use(bodyParser())
   .use(json({ pretty: process.env !== "production", param: "pretty" }))
   .use(router.routes())
