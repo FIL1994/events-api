@@ -1,7 +1,7 @@
 module.exports = require("knex")({
   client: "pg",
   connection: {
-    host: "localhost",
+    host: "db",
     user: "postgres",
     database: "postgres",
     port: 5432
