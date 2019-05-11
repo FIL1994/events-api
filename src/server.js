@@ -2,6 +2,7 @@ const Koa = require("koa");
 const Router = require("koa-router");
 const bodyParser = require("koa-bodyparser");
 const json = require("koa-json");
+const HttpStatus = require("http-status-codes");
 
 const app = new Koa();
 const router = new Router();
@@ -15,6 +16,18 @@ router.get("/", (ctx, next) => {
 router.get("/events", async (ctx, next) => {
   const events = await pg("events");
   ctx.body = events;
+});
+
+router.get("/events/:id", async (ctx, next) => {
+  const event = await pg("events")
+    .where({ id: ctx.params.id })
+    .first();
+
+  if (!event) {
+    ctx.throw(HttpStatus.NOT_FOUND);
+  }
+
+  ctx.body = event;
 });
 
 router.post("/events", async (ctx, next) => {
@@ -31,7 +44,7 @@ router.post("/events", async (ctx, next) => {
 
     ctx.body = event;
   } catch (err) {
-    ctx.throw(400, err);
+    ctx.throw(HttpStatus.BAD_REQUEST, err);
   }
 });
 
