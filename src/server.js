@@ -1,5 +1,6 @@
 const Koa = require("koa");
 const Router = require("koa-router");
+const bodyParser = require("koa-bodyparser");
 const json = require("koa-json");
 
 const app = new Koa();
@@ -16,7 +17,26 @@ router.get("/events", async (ctx, next) => {
   ctx.body = events;
 });
 
+router.post("/events", async (ctx, next) => {
+  const newEvent = ctx.request.body;
+
+  if (!newEvent.hasOwnProperty("title")) {
+    ctx.throw(400, "title is required");
+  }
+
+  try {
+    const event = await pg("events")
+      .insert(newEvent)
+      .returning("*");
+
+    ctx.body = event;
+  } catch (err) {
+    ctx.throw(400, err);
+  }
+});
+
 app
+  .use(bodyParser())
   .use(json({ pretty: process.env !== "production", param: "pretty" }))
   .use(router.routes())
   .use(router.allowedMethods())
