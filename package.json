@@ -1,0 +1,12 @@
+{
+  "name": "events-api",
+  "version": "0.1.0",
+  "description": "A rest API for events",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Philip Van Raalte",
+  "license": "ISC"
+}
