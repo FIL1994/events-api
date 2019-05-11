@@ -8,7 +8,7 @@ const router = new Router();
 const eventsRouter = require("./routes/events");
 
 router.get("/", (ctx, next) => {
-  ctx.body = "Hello World";
+  ctx.body = "Events API";
 });
 
 app

@@ -7,7 +7,9 @@ services:
       - "5432:5432"
     volumes:
       - ./db:/docker-entrypoint-initdb.d/
-  node:
-    image: "node:lts-jessie-slim"
-    depends_on:
-      - db
+  backend:
+    build: .
+    links:
+        - db
+    ports:
+      - "3000:3000"
