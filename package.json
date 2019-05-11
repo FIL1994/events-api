@@ -4,9 +4,14 @@
   "description": "A rest API for events",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "knex": "knex --knexfile knexfile.js"
   },
   "keywords": [],
   "author": "Philip Van Raalte",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "knex": "^0.16.5",
+    "pg": "^7.11.0"
+  }
 }
