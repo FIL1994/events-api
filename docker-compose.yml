@@ -10,6 +10,11 @@ services:
   backend:
     build: .
     links:
-        - db
+      - db
     ports:
       - "3000:3000"
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./:/usr/local/app
+    command: /usr/local/app/scripts/entrypoint.sh
